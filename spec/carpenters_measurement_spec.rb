@@ -2,7 +2,11 @@ require "spec_helper"
 
 describe CarpentersMeasurement do
 
-  it "should convert 1 to 1 inch" do
+  it "should rise an exception on negative number of inches" do
+    lambda{CarpentersMeasurement.of(-1.inch)}.should raise_error InvalidLengthError
+  end
+
+  it "should convert 1 inch to 1 inch" do
     CarpentersMeasurement.of(1.inch).should == "1 inch"
   end
 
@@ -12,15 +16,16 @@ describe CarpentersMeasurement do
     end
   end
 
-  it "should rise an exception on negative parameter" do
-    lambda{CarpentersMeasurement.of(-1.inch)}.should raise_error InvalidLengthError
-  end
-
-  it "should return 1 foot for 12 inches" do
+  it "should display 1 for for 12 inches" do
     CarpentersMeasurement.of(12.inches).should == "1 foot"
   end
 
-  it "should pluralize multiple feet" do
+  it "should pluralize the display of multiple feet" do
     CarpentersMeasurement.of(24.inches).should == "2 feet"
   end
+
+  it "should display an uneven number of feet" do
+    CarpentersMeasurement.of(26.inches).should == "2 feet 2 inches"
+  end
+
 end
