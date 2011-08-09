@@ -1,9 +1,10 @@
+require 'inches'
+
 class InvalidLengthError < RuntimeError
 end
 
-
-class LengthConverter
-  def self.convert decimal_form
+class CarpentersMeasurement
+  def self.of decimal_form
     raise InvalidLengthError if decimal_form < 0
     if decimal_form == 1
       "1 inch"
