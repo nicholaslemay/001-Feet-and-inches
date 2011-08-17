@@ -11,7 +11,7 @@ class CarpentersMeasurement
   end
 
   def display
-    the_number_of_feet + padding_between_feet_and_inches + the_inch_part
+    display_the_number_of_feet + padding_between_feet_and_inches + display_the_inch_part
   end
 
   private
@@ -20,12 +20,12 @@ class CarpentersMeasurement
     new(measurement_in_carpenters_notation).display
   end
 
-  def the_inch_part
+  def display_the_inch_part
     return display_the_rest_in_fraction if (@measurement_in_carpenters_notation.rest_in_thirty_seconds_of_an_inch.between?(1, 31))
     display_the_number_of_inches
   end
 
-  def the_number_of_feet
+  def display_the_number_of_feet
     return "" unless @measurement_in_carpenters_notation.number_of_feet > 0
     "#{@measurement_in_carpenters_notation.number_of_feet} #{@measurement_in_carpenters_notation.number_of_feet == 1 ? 'foot' : 'feet'}"
   end
