@@ -10,6 +10,11 @@ module ConversionToInches
 
 end
 
+
 class Fixnum
+  include ConversionToInches
+end
+
+class Float
   include ConversionToInches
 end

@@ -7,4 +7,8 @@ class CarpentersNotation
     @rest_in_inches = rest_in_inches
   end
 
+  def rest_in_thirty_seconds_of_an_inch
+    (rest_in_inches * 32).round.to_i
+  end
+
 end

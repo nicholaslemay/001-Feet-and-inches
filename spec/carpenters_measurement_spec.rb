@@ -28,4 +28,12 @@ describe CarpentersMeasurement do
     CarpentersMeasurement.of(26.inches).should == "2 feet 2 inches"
   end
 
+  it "should display the number of thirty seconds of an inch when appropriate" do
+    CarpentersMeasurement.of(12.2785.inches).should == "1 foot 9/32 inch"
+  end
+
+  it "should simplify the number of thirty seconds of an inch when appropriate" do
+    CarpentersMeasurement.of(12.6895.inches).should == "1 foot 11/16 inch"
+  end
+
 end

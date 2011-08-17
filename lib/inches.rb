@@ -9,7 +9,7 @@ class Inches
   end
 
   def in_carpenters_notation
-    CarpentersNotation.new(@total_number_of_inches/12, @total_number_of_inches % 12)
+    CarpentersNotation.new(@total_number_of_inches.to_i/12, @total_number_of_inches % 12)
   end
 
 end

@@ -1,32 +1,49 @@
 class CarpentersMeasurement
 
+  private_class_method :new
+
   def self.of number_of_inches
     display_the number_of_inches.in_carpenters_notation
   end
 
+  def initialize measurement_in_carpenters_notation
+    @measurement_in_carpenters_notation = measurement_in_carpenters_notation
+  end
+
+  def display
+    the_number_of_feet + padding_between_feet_and_inches + the_inch_part
+  end
+
   private
 
-  def self.display_the(carpenters_measurement)
-    display = display_number_of_feet_of(carpenters_measurement)
-    display +=  display_number_of_inches_of(carpenters_measurement)
-    display
+  def self.display_the measurement_in_carpenters_notation
+    new(measurement_in_carpenters_notation).display
   end
 
-  def self.display_number_of_feet_of(carpenters_measurement)
-    display_of__the_number_of_feet = ""
-    if carpenters_measurement.number_of_feet > 0
-      display_of__the_number_of_feet = "#{carpenters_measurement.number_of_feet} #{carpenters_measurement.number_of_feet == 1 ? 'foot' : 'feet'}"
-    end
-    display_of__the_number_of_feet
+  def the_inch_part
+    return display_the_rest_in_fraction if (@measurement_in_carpenters_notation.rest_in_thirty_seconds_of_an_inch.between?(1, 31))
+    display_the_number_of_inches
   end
 
-  def self.display_number_of_inches_of(carpenters_measurement)
-    display_of_the_number_of_inches = ""
-    if carpenters_measurement.rest_in_inches > 0 || carpenters_measurement.number_of_feet == 0
-      display_of_the_number_of_inches += " " if carpenters_measurement.number_of_feet != 0
-      display_of_the_number_of_inches += "#{carpenters_measurement.rest_in_inches} #{carpenters_measurement.rest_in_inches == 1 ? 'inch' : 'inches'}"
-    end
-    display_of_the_number_of_inches
+  def the_number_of_feet
+    return "" unless @measurement_in_carpenters_notation.number_of_feet > 0
+    "#{@measurement_in_carpenters_notation.number_of_feet} #{@measurement_in_carpenters_notation.number_of_feet == 1 ? 'foot' : 'feet'}"
+  end
+
+  def display_the_number_of_inches
+    return "" unless @measurement_in_carpenters_notation.rest_in_inches > 0 || @measurement_in_carpenters_notation.number_of_feet == 0
+    "#{@measurement_in_carpenters_notation.rest_in_inches} #{@measurement_in_carpenters_notation.rest_in_inches == 1 ? 'inch' : 'inches'}"
+  end
+
+  def display_the_rest_in_fraction
+    greatest_common_divisor = @measurement_in_carpenters_notation.rest_in_thirty_seconds_of_an_inch.gcd(32)
+    numerator = @measurement_in_carpenters_notation.rest_in_thirty_seconds_of_an_inch / greatest_common_divisor
+    denominator = 32 / greatest_common_divisor
+    "#{numerator}/#{denominator} inch"
+  end
+
+  def padding_between_feet_and_inches
+    @measurement_in_carpenters_notation.number_of_feet > 0 && @measurement_in_carpenters_notation.rest_in_inches > 0 ? " " : ""
   end
 
 end
