@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe CarpentersMeasurement do
 
-  it "should rise an exception on negative number of inches" do
+  it "should raise an exception on negative number of inches" do
     lambda{CarpentersMeasurement.of(-1.inch)}.should raise_error InvalidLengthError
   end
 
